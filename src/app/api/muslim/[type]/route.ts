@@ -1,74 +1,51 @@
 import { Item } from "rss-parser";
-import { parseRSS, replaceQueryParams, search } from "@/app/utils";
 import { NextResponse, NextRequest } from "next/server";
+
+type ParsedItem = {
+  title: string;
+  link: string;
+  creator: string;
+  pubDate: string;
+  categories: string[];
+  description: string;
+};
 
 type ResponseData = {
   message: string;
   total?: number;
-  data?: ({
-    [key: string]: any;
-  } & Item)[];
+  data?: ParsedItem[];
 };
 
-export async function GET(
-  request: NextRequest,
-  { params }: { params: { type: string } }
-) {
+export async function GET(request: NextRequest) {
   try {
-    const MUSLIM_NEWS_RSS = `https://muslim.or.id/category/{type}/feed`;
+    const RSS_URL = 'https://muslim.or.id/category/akidah/feed';
+    const parser = new Item();
+    const feed = await parser.parseURL(RSS_URL);
 
-    const url = new URL(request.url);
-    const searchParams = url.searchParams.get("search");
-    const result = await parseRSS({
-      url: MUSLIM_NEWS_RSS.replace("{type}", params.type),
-    });
+    const data: ParsedItem[] = feed.items.map((item) => ({
+      title: item.title,
+      link: item.link,
+      creator: item.creator,
+      pubDate: item.pubDate,
+      categories: item.categories,
+      description: item.contentSnippet, // atau item['content:encoded'] jika Anda ingin HTML penuh
+    }));
 
-    const data = result.items.map((items) => {
-      const image = replaceQueryParams(
-        items?.enclosure?.url as string,
-        "q",
-        "100"
-      );
-      delete items.pubDate;
-      delete items["content:encoded"];
-      delete items["content:encodedSnippet"];
-      delete items.content;
-      delete items.guid;
-      items.image = {
-        small: items?.enclosure?.url,
-        large: image,
-      };
-      delete items.enclosure;
-      return items;
-    });
-
-    let responseData: ResponseData = {
-      message: `Result of type ${params.type} news in CNN News`,
+    const responseData: ResponseData = {
+      message: 'Parsed RSS Feed',
       total: data.length,
       data,
     };
 
-    if (searchParams) {
-      const searchData = search(data, searchParams);
-      let result: Item[] = [];
-      searchData.map((items) => result.push(items.item));
-      responseData = {
-        message: `Result of type ${params.type} news in CNN News with title search: ${searchParams}`,
-        total: searchData.length,
-        data: result,
-      };
-    }
-
     return NextResponse.json(responseData);
   } catch (e) {
     const error = e as Error;
-  console.error(error);
     return NextResponse.json(
       {
-        message: "Something error",
+        message: 'Error parsing RSS Feed',
         error: error.message,
       },
-      { status: 400 }
+      { status: 500 }
     );
   }
 }
