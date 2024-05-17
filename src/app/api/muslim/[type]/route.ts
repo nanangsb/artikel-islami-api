@@ -15,12 +15,12 @@ export async function GET(
   { params }: { params: { type: string } }
 ) {
   try {
-    const MUSLIM_RSS = `https://muslim.or.id/category/{type}/feed`;
+    const MUSLIM_NEWS_RSS = `https://muslim.or.id/category/{type}/feed`;
 
     const url = new URL(request.url);
     const searchParams = url.searchParams.get("search");
     const result = await parseRSS({
-      url: MUSLIM_RSS.replace("{type}", params.type),
+      url: MUSLIM_NEWS_RSS.replace("{type}", params.type),
     });
 
     const data = result.items.map((items) => {
