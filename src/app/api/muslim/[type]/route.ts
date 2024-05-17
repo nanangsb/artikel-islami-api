@@ -24,7 +24,7 @@ export async function GET(
     });
 
     const data = result.items.map((items) => {
-      delete items.dc:creator;
+      delete items.["dc:creator"];
       delete items.guid;
       delete items.categories;
       delete items.pubDate;
