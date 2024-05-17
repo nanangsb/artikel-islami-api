@@ -30,6 +30,7 @@ export async function GET(request: NextRequest) {
       delete items.guid;
       delete items.categories;
       delete items.comments;
+      delete items.description;
       return items;
     });
 
