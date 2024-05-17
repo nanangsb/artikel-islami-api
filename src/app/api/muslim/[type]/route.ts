@@ -28,6 +28,9 @@ export async function GET(
       delete items.guid;
       delete items.categories;
       delete items.pubDate;
+      delete items.creator;
+      delete items.creator;
+      delete items.content;
       return items;
     });
 
