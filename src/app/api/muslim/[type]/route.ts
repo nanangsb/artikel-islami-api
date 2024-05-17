@@ -1,5 +1,5 @@
 import { Item } from "rss-parser";
-import { parseRSS, replaceQueryParams, search } from "@/app/utils";
+import { parseRSS, search } from "@/app/utils";
 import { NextResponse, NextRequest } from "next/server";
 
 type ResponseData = {
@@ -15,7 +15,7 @@ export async function GET(
   { params }: { params: { type: string } }
 ) {
   try {
-    const MUSLIM_NEWS_RSS = "https://muslim.or.id/category/{type}/feed";
+    const MISLIM_NEWS_RSS = `http://muslim.or.id/category/{type}/feed`;
 
     const url = new URL(request.url);
     const searchParams = url.searchParams.get("search");
@@ -24,29 +24,12 @@ export async function GET(
     });
 
     const data = result.items.map((items) => {
-      const image = replaceQueryParams(
-        items?.enclosure?.url as string,
-        "q",
-        "100"
-      );
-      items.title = items.title?.replace("...", "").trim();
-      items.contentSnippet = items.contentSnippet?.trim();
-      delete items.pubDate;
-      delete items["content:encoded"];
-      delete items["content:encodedSnippet"];
-      delete items.content;
-      delete items.guid;
-      delete items.categories;
-      items.image = {
-        small: items?.enclosure?.url,
-        large: image,
-      };
-      delete items.enclosure;
+      delete items.contentSnippet;
       return items;
     });
 
     let responseData: ResponseData = {
-      message: `Result of type ${params.type} news in Suara News`,
+      message: `Result of type ${params.type} news in Tempo News`,
       total: data.length,
       data,
     };
@@ -56,7 +39,7 @@ export async function GET(
       let result: Item[] = [];
       searchData.map((items) => result.push(items.item));
       responseData = {
-        message: `Result of type ${params.type} news in Suara News with title search: ${searchParams}`,
+        message: `Result of type ${params.type} news in Tempo News with title search: ${searchParams}`,
         total: searchData.length,
         data: result,
       };
