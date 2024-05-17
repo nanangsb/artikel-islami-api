@@ -220,6 +220,7 @@ export async function GET() {
       },
       "Muslim.or.id": {
         all: "/api/muslim/",
+        type: "/api/muslim/:type",
         listType: [
           "akidah",
           "manhaj",
