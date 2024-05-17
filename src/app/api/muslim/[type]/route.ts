@@ -15,7 +15,7 @@ export async function GET(
   { params }: { params: { type: string } }
 ) {
   try {
-    const CNBC_NEWS_RSS = `https://muslim.or.id/{type}/rss`;
+    const MUSLIM_RSS = `https://muslim.or.id/{type}/rss`;
 
     const url = new URL(request.url);
     const searchParams = url.searchParams.get("search");
