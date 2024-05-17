@@ -1,51 +1,74 @@
 import { Item } from "rss-parser";
+import { parseRSS, replaceQueryParams, search } from "@/app/utils";
 import { NextResponse, NextRequest } from "next/server";
-
-type ParsedItem = {
-  title: string;
-  link: string;
-  creator: string;
-  pubDate: string;
-  categories: string[];
-  description: string;
-};
 
 type ResponseData = {
   message: string;
   total?: number;
-  data?: ParsedItem[];
+  data?: ({
+    [key: string]: any;
+  } & Item)[];
 };
 
-export async function GET(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { type: string } }
+) {
   try {
-    const RSS_URL = 'https://muslim.or.id/category/akidah/feed';
-    const parser = new Item();
-    const feed = await parser.parseURL(RSS_URL);
+    const MUSLIM_NEWS_RSS = "https://muslim.or.id/category/{type}/feed";
 
-    const data: ParsedItem[] = feed.items.map((item) => ({
-      title: item.title,
-      link: item.link,
-      creator: item.creator,
-      pubDate: item.pubDate,
-      categories: item.categories,
-      description: item.contentSnippet, // atau item['content:encoded'] jika Anda ingin HTML penuh
-    }));
+    const url = new URL(request.url);
+    const searchParams = url.searchParams.get("search");
+    const result = await parseRSS({
+      url: MUSLIM_NEWS_RSS.replace("{type}", params.type),
+    });
 
-    const responseData: ResponseData = {
-      message: 'Parsed RSS Feed',
+    const data = result.items.map((items) => {
+      const image = replaceQueryParams(
+        items?.enclosure?.url as string,
+        "q",
+        "100"
+      );
+      items.title = items.title?.replace("...", "").trim();
+      items.contentSnippet = items.contentSnippet?.trim();
+      delete items.pubDate;
+      delete items["content:encoded"];
+      delete items["content:encodedSnippet"];
+      delete items.content;
+      delete items.guid;
+      delete items.categories;
+      items.image = {
+        small: items?.enclosure?.url,
+        large: image,
+      };
+      delete items.enclosure;
+      return items;
+    });
+
+    let responseData: ResponseData = {
+      message: `Result of type ${params.type} news in Suara News`,
       total: data.length,
       data,
     };
 
+    if (searchParams) {
+      const searchData = search(data, searchParams);
+      let result: Item[] = [];
+      searchData.map((items) => result.push(items.item));
+      responseData = {
+        message: `Result of type ${params.type} news in Suara News with title search: ${searchParams}`,
+        total: searchData.length,
+        data: result,
+      };
+    }
+
     return NextResponse.json(responseData);
   } catch (e) {
-    const error = e as Error;
     return NextResponse.json(
       {
-        message: 'Error parsing RSS Feed',
-        error: error.message,
+        message: "Something error",
       },
-      { status: 500 }
+      { status: 400 }
     );
   }
 }
