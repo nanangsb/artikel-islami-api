@@ -23,21 +23,18 @@ export async function GET(request: NextRequest) {
       items.description = limitString(items.contentSnippet as string, 450);
       items.image = items.enclosure?.url;
       delete items.creator;
-      delete items.contentSnippet;
       delete items.pubDate;
       delete items.author;
-      delete items["content:encoded"];
-      delete items["content:encodedSnippet"];
+      delete items["dc:creator"];
       delete items.content;
       delete items.guid;
       delete items.categories;
-      delete items.enclosure;
       delete items.comments;
       return items;
     });
 
     let responseData = {
-      messages: "Result of all news in MUSLIM.OR.ID",
+      messages: "Result of all news in muslim.or.id",
       total: data.length,
       data,
     };
@@ -47,7 +44,7 @@ export async function GET(request: NextRequest) {
       let result: Item[] = [];
       searchData.map((items) => result.push(items.item));
       responseData = {
-        messages: `Result of all news in MISLIM with title search: ${searchParams}`,
+        messages: `Result of all article in Muslim.or.id with title search: ${searchParams}`,
         total: searchData.length,
         data: result,
       };
