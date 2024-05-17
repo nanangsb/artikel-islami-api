@@ -39,7 +39,7 @@ export default function Home() {
       </nav>
       <section className="flex w-full flex-col justify-center items-center pt-10">
         <h1 className="w-3/4 text-6xl font-bold bg-gradient-to-r from-sky-500 via-sky-600 to-sky-500 bg-clip-text text-transparent text-center">
-          Discover <span className="text-slate-800">Muslim Article API</span> In Indonesia
+          Discover <span className="text-slate-800">Artikel Islami API</span> In Indonesia
         </h1>
         <p className="text-slate-600 text-xl mt-6 max-w-2xl text-center">
           Artikel Islami API is an Public API to get latest islamic article from the
