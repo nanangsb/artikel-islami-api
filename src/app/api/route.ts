@@ -218,9 +218,41 @@ export async function GET() {
       "VOA Indonesia": {
         all: "/api/voa-news",
       },
-      "Mislim.or.id": {
-        all: "/api/muslim",
+      "Muslim.or.id": {
+        all: "/api/muslim/",
+        type: "/api/muslim/:type",
+        listType: [
+          "akidah",
+          "manhaj",
+          "fikih-dan-muamalah",
+          "akhlak-dan-nasihat",
+          "hadis",
+          "landasan-agama",
+          "khotbah-jumat",
+          "keluarga",
+          "tafsir",
+          "tazkiyatun-nufus",
+          "syiah",
+          "ramadan",
+          "sejarah-islam",
+          "sejarah",
+          "fikih",
+          "jejak-islam",
+          "kesehatan-islami",
+          "bahasa-arab",
+          "kolom-ti",
+          "donasi",
+          "info-dauroh-dan-kajian",
+          "info-lembaga-pendidikan",
+          "info-lowongan-kerja",
+        ],
       },
     },
   });
 }
+
+
+
+
+
+
