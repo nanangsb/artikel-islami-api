@@ -218,6 +218,9 @@ export async function GET() {
       "VOA Indonesia": {
         all: "/api/voa-news",
       },
+      "Mislim.or.id": {
+        all: "/api/muslim",
+      },
     },
   });
 }
