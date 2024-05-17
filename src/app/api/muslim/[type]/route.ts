@@ -15,7 +15,7 @@ export async function GET(
   { params }: { params: { type: string } }
 ) {
   try {
-    const MISLIM_NEWS_RSS = `http://muslim.or.id/category/{type}/feed`;
+    const MUSLIM_NEWS_RSS = `http://muslim.or.id/category/{type}/feed`;
 
     const url = new URL(request.url);
     const searchParams = url.searchParams.get("search");
