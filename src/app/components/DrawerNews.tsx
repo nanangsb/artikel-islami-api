@@ -149,7 +149,7 @@ export const DrawerNews = ({
                 {(data?.types && data.isNotAll) || isType ? (
                   <div className="form-control w-full max-w-xs">
                     <label className="label">
-                      <span className="label-text">Select type</span>
+                      <span className="label-text">Select category</span>
                     </label>
                     <select
                       className="select select-bordered"
@@ -181,7 +181,7 @@ export const DrawerNews = ({
               >
                 Example:{" "}
                 <span ref={exampleUrl}>
-                  https://berita-indo-api-next.vercel.app/api/
+                  https://api-artikel.abusofiya.com/api/
                   {slugify(data?.news as string)}/
                   {zone ? slugify(zone) + "/" : null}
                   {slugify(type as string)}
