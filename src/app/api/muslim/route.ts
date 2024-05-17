@@ -12,7 +12,7 @@ const limitString = (str: string, limit: number): string => {
 
 export async function GET(request: NextRequest) {
   try {
-    const MUSLIM_NEWS_RSS = "https://muslim.or.id/feed";
+    const MUSLIM_NEWS_RSS = "https://muslim.or.id/wp-json/wp/v2/posts";
     const url = new URL(request.url);
     const searchParams = url.searchParams.get("search");
     const result = await parseRSS({
