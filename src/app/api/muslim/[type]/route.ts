@@ -29,7 +29,7 @@ export async function GET(
       delete items.categories;
       delete items.pubDate;
       delete items.creator;
-      delete items.creator;
+      delete items.comments;
       delete items.content;
       return items;
     });
