@@ -35,7 +35,7 @@ export async function GET(
     });
 
     let responseData: ResponseData = {
-      message: `Result of type ${params.type} news in Tempo News`,
+      message: `Result of type ${params.type} article in Muslim.or.id`,
       total: data.length,
       data,
     };
@@ -45,7 +45,7 @@ export async function GET(
       let result: Item[] = [];
       searchData.map((items) => result.push(items.item));
       responseData = {
-        message: `Result of type ${params.type} news in Tempo News with title search: ${searchParams}`,
+        message: `Result of type ${params.type} article in Muslim.or.id with title search: ${searchParams}`,
         total: searchData.length,
         data: result,
       };
