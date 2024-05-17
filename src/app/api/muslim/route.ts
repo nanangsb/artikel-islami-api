@@ -1,43 +1,37 @@
-import { parseRSS, search } from "@/app/utils";
+import { parseRSS, replaceQueryParams, search } from "@/app/utils";
 import { NextResponse, NextRequest } from "next/server";
 import { Item } from "rss-parser";
 
-const limitString = (str: string, limit: number): string => {
-  const string: string = str;
-  const length: number = limit;
-  const result: string =
-    string.length > length ? string.substring(0, length) + "...." : string;
-  return result;
-};
-
 export async function GET(request: NextRequest) {
   try {
-    const MUSLIM_NEWS_RSS = "https://muslim.or.id/feed";
+    const CNBC_NEWS_RSS = "https://muslim.or.id/feed";
     const url = new URL(request.url);
     const searchParams = url.searchParams.get("search");
     const result = await parseRSS({
-      url: MUSLIM_NEWS_RSS,
+      url: MUSLIM_RSS,
     });
 
     const data = result.items.map((items) => {
-      items.description = limitString(items.contentSnippet as string, 450);
-      items.image = items.enclosure?.url;
-      delete items.creator;
-      delete items.contentSnippet;
+      const image = replaceQueryParams(
+        items?.enclosure?.url as string,
+        "q",
+        "100"
+      );
       delete items.pubDate;
-      delete items.author;
       delete items["content:encoded"];
       delete items["content:encodedSnippet"];
       delete items.content;
       delete items.guid;
-      delete items.categories;
+      items.image = {
+        small: items?.enclosure?.url,
+        large: image,
+      };
       delete items.enclosure;
-      delete items.comments;
       return items;
     });
 
     let responseData = {
-      messages: "Result of all news in MUSLIM.OR.ID",
+      messages: "Result of all Article in Muslim.or.id",
       total: data.length,
       data,
     };
@@ -47,7 +41,7 @@ export async function GET(request: NextRequest) {
       let result: Item[] = [];
       searchData.map((items) => result.push(items.item));
       responseData = {
-        messages: `Result of all news in MISLIM with title search: ${searchParams}`,
+        messages: `Result of all news in Muslim.or.id with title search: ${searchParams}`,
         total: searchData.length,
         data: result,
       };
