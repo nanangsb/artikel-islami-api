@@ -61,9 +61,11 @@ export async function GET(
 
     return NextResponse.json(responseData);
   } catch (e) {
+    console.error(e); 
     return NextResponse.json(
       {
         message: "Something error",
+        error: e.message,
       },
       { status: 400 }
     );
