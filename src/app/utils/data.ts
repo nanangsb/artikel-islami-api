@@ -201,4 +201,7 @@ export const listNews: ListNews[] = [
   {
     news: "Voa News",
   },
+  {
+    news: "Muslim",
+  },
 ];
