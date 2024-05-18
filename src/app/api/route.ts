@@ -81,8 +81,8 @@ export async function GET() {
         all: "/api/almanhaj",
       },
 	  "Pengusaha Muslim": {
-        all: "/api/pengusahamuslim/",
-        type: "/api/pengusahamuslim/:type",
+        all: "/api/pengusaha-muslim/",
+        type: "/api/pengusaha-muslim/:type",
         listType: [
 		"artikel",
 		"tanya-jawab-syariah",
@@ -121,8 +121,8 @@ export async function GET() {
         ],
       },
 	  "Khotbah Jumat": {
-        all: "/api/khotbahjumat/",
-        type: "/api/khotbahjumat/:type",
+        all: "/api/khotbah-jumat/",
+        type: "/api/khotbah-jumat/:type",
         listType: [
 		"akhlak-dan-muamalah",
 		"artikel-khutbah-jumat-2",
