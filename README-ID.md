@@ -1,9 +1,9 @@
 <div align="center">
-<h1>Berita Indo API</h1>
+<h1>Artikel Islami API</h1>
 
-<p>Sebuah API untuk menampilkan berita Indonesia</p>
+<p>Sebuah API untuk menampilkan Artikel Islami</p>
 
-![berita-indo-api](https://socialify.git.ci/satyawikananda/berita-indo-api/image?description=1&forks=1&issues=1&logo=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F26%2F91%2Ff2%2F2691f2fa1a0f078f5f274edf7fea6763.png&owner=1&pulls=1&stargazers=1&theme=Light)
+![artikel-islami-api](https://cdn.jsdelivr.net/gh/nanangsb/artikel-islami-api@main/public/banner.png)
 
 </div>
 
