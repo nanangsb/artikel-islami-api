@@ -226,6 +226,27 @@ export const listNews: ListNews[] = [
         ],
       },
   {
+    news: "Muslimah",
+    types: [
+          "adab-doa",
+"akhlak-dan-nasihat",
+"akidah",
+"fikih",
+"keluarga-dan-wanita",
+"pendidikan-anak",
+"kesehatan-muslimah",
+"quran",
+"kisah",
+"info-dauroh-kajian",
+"hadis",
+"dari-redaksi",
+"manhaj",
+"nasihat-ulama",
+"ramadan",
+"tazkiyatun-nafs",
+        ],
+      },
+  {
     news: "Rumaysho",
     types: [
           "akhlaq",
