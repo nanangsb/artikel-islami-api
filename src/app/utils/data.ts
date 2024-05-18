@@ -229,7 +229,7 @@ export const listNews: ListNews[] = [
     news: "Rumaysho",
     types: [
           "akhlaq",
-          amalan",
+          "amalan",
 "aqidah",
 "tafsir-al-quran",
 "muamalah",
