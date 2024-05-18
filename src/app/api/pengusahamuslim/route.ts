@@ -12,11 +12,11 @@ const limitString = (str: string, limit: number): string => {
 
 export async function GET(request: NextRequest) {
   try {
-    const MUSLIM_NEWS_RSS = "https://muslim.or.id/feed";
+    const PENGUSAHA_NEWS_RSS = "https://pengusahamuslim.com/feed";
     const url = new URL(request.url);
     const searchParams = url.searchParams.get("search");
     const result = await parseRSS({
-      url: MUSLIM_NEWS_RSS,
+      url: PENGUSAHA_NEWS_RSS,
     });
 
     const data = result.items.map((items) => {
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
     });
 
     let responseData = {
-      messages: "Result of all articles in Muslim.or.id",
+      messages: "Result of all articles in Pengusaha Muslim",
       total: data.length,
       data,
     };
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
       let result: Item[] = [];
       searchData.map((items) => result.push(items.item));
       responseData = {
-        messages: `Result of all articles in Muslim.or.id with title search: ${searchParams}`,
+        messages: `Result of all articles in Pengusaha Muslim with title search: ${searchParams}`,
         total: searchData.length,
         data: result,
       };

@@ -97,7 +97,7 @@ export const DrawerNews = ({
                 <span className="font-medium text-xl">{data?.news} API</span>
                 <span
                   role="button"
-                  className="text-md cursor-pointer hover:underline"
+                  className="bg-slate-800 p-3 rounded-lg mt-8 text-white w-36 hover:bg-slate-900 transition-colors flex justify-center items-center gap-2"
                   onClick={() => {
                     onOpenChange(false);
                     setResult(null);
