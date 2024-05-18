@@ -252,7 +252,7 @@ export async function GET() {
         type: "/api/rumaysho/:type",
         listType: [
           "akhlaq",
-          amalan",
+          "amalan",
 "aqidah",
 "tafsir-al-quran",
 "muamalah",
