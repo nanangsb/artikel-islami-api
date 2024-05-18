@@ -33,7 +33,7 @@ export const listNews: ListNews[] = [
   {
     news: "Muslimah",
     types: [
-        "adab-doa",
+        	"adab-doa",
 		"akhlak-dan-nasihat",
 		"akidah",
 		"fikih",
@@ -54,8 +54,8 @@ export const listNews: ListNews[] = [
   {
     news: "Rumaysho",
     types: [
-        "akhlaq",
-        "amalan",
+        	"akhlaq",
+        	"amalan",
 		"aqidah",
 		"tafsir-al-quran",
 		"muamalah",
@@ -80,6 +80,6 @@ export const listNews: ListNews[] = [
         ],
       },
 	    {
-		news: "Rumaysho",
+		news: "Almanhaj",
 		},
 ];
