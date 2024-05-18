@@ -3,7 +3,6 @@ import Link from "next/link";
 import { useState } from "react";
 import { ListNews, listNews } from "@/app/utils";
 import { DrawerNews } from "./components/DrawerNews";
-import { Tweet } from "react-tweet";
 
 export default function Home() {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false);
@@ -19,7 +18,7 @@ export default function Home() {
           target="_blank"
         >
           <button className="bg-slate-800 p-3 rounded-lg text-white hover:bg-slate-900 transition-colors flex flex-row items-center gap-2">
-            <span className="text-sm">Star on GitHub</span>
+            <span className="text-sm">GitHub</span>
             <svg
               data-v-56bd7dfc=""
               xmlns="http://www.w3.org/2000/svg"
